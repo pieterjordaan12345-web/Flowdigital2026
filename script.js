@@ -258,3 +258,18 @@ style.innerHTML = `
 `;
 
 document.head.appendChild(style);
+html {
+    scroll-behavior: smooth;
+}
+
+/* Snap scrolling system */
+body {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+}
+
+/* Each section becomes a snap point */
+.section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
