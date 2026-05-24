@@ -1,12 +1,14 @@
 /* =========================
    FLOW DIGITAL - V2 PREMIUM ANIMATIONS
-   (Optimized + More Interactive)
+   (Optimized + Interactive + Particle System)
 ========================= */
+
 
 /* =========================
    1. SMOOTH PAGE INTRO
 ========================= */
 window.addEventListener("load", () => {
+
     document.body.style.opacity = "0";
     document.body.style.transition = "opacity 0.8s ease";
 
@@ -30,22 +32,32 @@ window.addEventListener("load", () => {
 
 
 /* =========================
-   2. IMPROVED SCROLL REVEAL (ONCE ONLY + STAGGER)
+   2. IMPROVED SCROLL REVEAL
 ========================= */
 const revealObserver = new IntersectionObserver((entries) => {
+
     entries.forEach(entry => {
+
         if (entry.isIntersecting) {
             entry.target.classList.add("show");
-            revealObserver.unobserve(entry.target); // prevents re-trigger spam
-        }
-    });
-}, { threshold: 0.12 });
 
-document.querySelectorAll(".section, .card, .contact-card, .service-card, .why-card")
-.forEach((el, index) => {
+            // Prevent repeated animations
+            revealObserver.unobserve(entry.target);
+        }
+
+    });
+
+}, {
+    threshold: 0.12
+});
+
+document.querySelectorAll(
+    ".section, .card, .contact-card, .service-card, .why-card"
+).forEach((el, index) => {
+
     el.classList.add("hidden");
 
-    // stagger effect
+    // stagger animation timing
     el.style.transitionDelay = `${index * 0.05}s`;
 
     revealObserver.observe(el);
@@ -53,19 +65,23 @@ document.querySelectorAll(".section, .card, .contact-card, .service-card, .why-c
 
 
 /* =========================
-   3. MAGNETIC BUTTON SYSTEM (premium feel)
+   3. MAGNETIC BUTTON SYSTEM
 ========================= */
 document.querySelectorAll(".btn").forEach(btn => {
 
     btn.addEventListener("mousemove", (e) => {
+
         const rect = btn.getBoundingClientRect();
+
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
         const moveX = (x - rect.width / 2) * 0.2;
         const moveY = (y - rect.height / 2) * 0.2;
 
-        btn.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.03)`;
+        btn.style.transform =
+            `translate(${moveX}px, ${moveY}px) scale(1.03)`;
+
         btn.style.transition = "0.1s ease";
     });
 
@@ -93,25 +109,34 @@ document.querySelectorAll(".btn").forEach(btn => {
 
         btn.appendChild(ripple);
 
-        setTimeout(() => ripple.remove(), 600);
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+
     });
+
 });
 
 
 /* =========================
-   4. 3D CARD TILT (VERY PREMIUM FEEL)
+   4. 3D CARD TILT EFFECT
 ========================= */
-document.querySelectorAll(".card, .service-card, .why-card")
-.forEach(card => {
+document.querySelectorAll(
+    ".card, .service-card, .why-card"
+).forEach(card => {
 
     card.addEventListener("mousemove", (e) => {
+
         const rect = card.getBoundingClientRect();
 
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        const rotateX = ((y / rect.height) - 0.5) * -10;
-        const rotateY = ((x / rect.width) - 0.5) * 10;
+        const rotateX =
+            ((y / rect.height) - 0.5) * -10;
+
+        const rotateY =
+            ((x / rect.width) - 0.5) * 10;
 
         card.style.transform = `
             perspective(1000px)
@@ -124,33 +149,44 @@ document.querySelectorAll(".card, .service-card, .why-card")
     });
 
     card.addEventListener("mouseleave", () => {
-        card.style.transform = "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
+
+        card.style.transform =
+            "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
+
         card.style.transition = "0.4s ease";
     });
+
 });
 
 
 /* =========================
-   5. SMOOTH SCROLL (IMPROVED)
+   5. SMOOTH SCROLL LINKS
 ========================= */
 document.querySelectorAll('a[href^="#"]').forEach(link => {
+
     link.addEventListener("click", (e) => {
+
         e.preventDefault();
 
-        const target = document.querySelector(link.getAttribute("href"));
+        const target =
+            document.querySelector(link.getAttribute("href"));
 
         if (target) {
+
             target.scrollIntoView({
                 behavior: "smooth",
                 block: "start"
             });
+
         }
+
     });
+
 });
 
 
 /* =========================
-   6. SCROLL PROGRESS BAR (SMOOTHER)
+   6. SCROLL PROGRESS BAR
 ========================= */
 const progressBar = document.createElement("div");
 
@@ -168,18 +204,29 @@ transition: width 0.1s ease;
 document.body.appendChild(progressBar);
 
 window.addEventListener("scroll", () => {
-    requestAnimationFrame(() => {
-        const scrollTop = document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-        const scrolled = (scrollTop / scrollHeight) * 100;
-        progressBar.style.width = scrolled + "%";
+    requestAnimationFrame(() => {
+
+        const scrollTop =
+            document.documentElement.scrollTop;
+
+        const scrollHeight =
+            document.documentElement.scrollHeight -
+            window.innerHeight;
+
+        const scrolled =
+            (scrollTop / scrollHeight) * 100;
+
+        progressBar.style.width =
+            scrolled + "%";
+
     });
+
 });
 
 
 /* =========================
-   7. SMART CURSOR (GLASS GLOW + SMOOTH FOLLOW)
+   7. SMART CURSOR
 ========================= */
 const cursor = document.createElement("div");
 
@@ -198,15 +245,21 @@ transition: transform 0.05s linear;
 
 document.body.appendChild(cursor);
 
-let mouseX = 0, mouseY = 0;
-let cursorX = 0, cursorY = 0;
+let mouseX = 0;
+let mouseY = 0;
+
+let cursorX = 0;
+let cursorY = 0;
 
 document.addEventListener("mousemove", (e) => {
+
     mouseX = e.clientX;
     mouseY = e.clientY;
+
 });
 
 function animateCursor() {
+
     cursorX += (mouseX - cursorX) * 0.15;
     cursorY += (mouseY - cursorY) * 0.15;
 
@@ -215,61 +268,207 @@ function animateCursor() {
 
     requestAnimationFrame(animateCursor);
 }
+
 animateCursor();
 
 
 /* =========================
-   8. PARALLAX LAYERS (SMOOTHER + MULTI DEPTH)
+   8. PARALLAX HERO EFFECT
 ========================= */
 window.addEventListener("scroll", () => {
+
     requestAnimationFrame(() => {
+
         const hero = document.querySelector(".hero");
 
         if (hero) {
-            hero.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+
+            hero.style.transform =
+                `translateY(${window.scrollY * 0.15}px)`;
+
         }
+
     });
+
 });
 
 
 /* =========================
-   9. GLOBAL ANIMATION CSS
+   9. SECTION SNAP SCROLLING
+========================= */
+document.documentElement.style.scrollBehavior = "smooth";
+
+window.addEventListener("load", () => {
+
+    const sections =
+        document.querySelectorAll(".section");
+
+    sections.forEach(section => {
+
+        section.style.scrollSnapAlign = "start";
+        section.style.scrollSnapStop = "always";
+
+    });
+
+});
+
+
+/* =========================
+   10. PARTICLE BACKGROUND SYSTEM
+========================= */
+const particleContainer =
+    document.getElementById("particle-container");
+
+if (particleContainer) {
+
+    function createParticle() {
+
+        const particle =
+            document.createElement("div");
+
+        particle.className = "particle";
+
+        // random position
+        particle.style.left =
+            Math.random() * 100 + "vw";
+
+        // random size
+        const size =
+            Math.random() * 3 + 2;
+
+        particle.style.width =
+            size + "px";
+
+        particle.style.height =
+            size + "px";
+
+        // random speed
+        const duration =
+            Math.random() * 6 + 4;
+
+        particle.style.animationDuration =
+            duration + "s";
+
+        // random blue glow variation
+        const blue =
+            120 + Math.random() * 100;
+
+        particle.style.background =
+            `rgba(77, ${blue}, 255, 0.35)`;
+
+        particleContainer.appendChild(particle);
+
+        setTimeout(() => {
+
+            particle.remove();
+
+        }, duration * 1000);
+
+    }
+
+    // create particles continuously
+    setInterval(createParticle, 160);
+}
+
+
+/* =========================
+   11. PERFORMANCE GUARD
+========================= */
+let ticking = false;
+
+function safeRAF(callback) {
+
+    if (!ticking) {
+
+        requestAnimationFrame(() => {
+
+            callback();
+            ticking = false;
+
+        });
+
+        ticking = true;
+    }
+
+}
+
+
+/* =========================
+   12. GLOBAL ANIMATION CSS
 ========================= */
 const style = document.createElement("style");
 
 style.innerHTML = `
+
+/* Hidden reveal states */
 .hidden {
     opacity: 0;
     transform: translateY(40px);
 }
 
+/* Reveal animation */
 .show {
     opacity: 1;
     transform: translateY(0);
     transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Ripple animation */
 @keyframes ripple {
+
     to {
         transform: scale(6);
         opacity: 0;
     }
+
 }
+
+/* Snap scrolling */
+body {
+    scroll-snap-type: y mandatory;
+}
+
+/* Particle background */
+#particle-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Individual particles */
+.particle {
+    position: absolute;
+    bottom: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    animation: floatUp linear forwards;
+}
+
+/* Floating particle animation */
+@keyframes floatUp {
+
+    from {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.7;
+    }
+
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+
+}
+
 `;
 
 document.head.appendChild(style);
-html {
-    scroll-behavior: smooth;
-}
-
-/* Snap scrolling system */
-body {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-}
-
-/* Each section becomes a snap point */
-.section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-}
