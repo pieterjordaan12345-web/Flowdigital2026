@@ -1,34 +1,126 @@
-/* =========================
-   FLOW DIGITAL MAIN THEME
+/* =========================================================
+   FLOW DIGITAL - OPTIMIZED PREMIUM THEME SYSTEM
    Grey / Black / White / Light Blue
-========================= */
+   Optimized For:
+   - Premium animations
+   - Particle system
+   - Snap scrolling
+   - 3D effects
+   - Smooth interactions
+========================================================= */
+
+
+/* =========================================================
+   1. GLOBAL RESET
+========================================================= */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #0f0f10; /* dark background */
+    font-family: Arial, sans-serif;
+    background-color: #0f0f10;
     color: #ffffff;
     line-height: 1.6;
+    overflow-x: hidden;
+
+    /* Snap scrolling */
+    scroll-snap-type: y mandatory;
+
+    /* Better rendering */
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
-/* =========================
-   NAVBAR
-========================= */
+
+/* =========================================================
+   2. PARTICLE BACKGROUND SUPPORT
+========================================================= */
+
+#particle-container {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    bottom: 0;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(77, 166, 255, 0.35);
+    animation: floatUp linear forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes floatUp {
+
+    from {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.7;
+    }
+
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   3. GLOBAL ANIMATION STATES
+========================================================= */
+
+.hidden {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+        opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+        transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+
+/* =========================================================
+   4. NAVBAR
+========================================================= */
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: 20px 40px;
-    background-color: #1a1a1a;
+
+    background: rgba(26, 26, 26, 0.85);
+
+    backdrop-filter: blur(12px);
+
     position: sticky;
     top: 0;
+
     z-index: 1000;
+
     border-bottom: 1px solid #2a2a2a;
 }
 
@@ -42,38 +134,51 @@ nav {
     color: #ffffff;
     text-decoration: none;
     margin-left: 20px;
-    transition: 0.3s;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
 }
 
 .nav-links a:hover {
     color: #4da6ff;
+    transform: translateY(-2px);
 }
 
-/* =========================
-   HERO SECTION
-========================= */
+
+/* =========================================================
+   5. HERO SECTION
+========================================================= */
 
 .hero {
     padding: 120px 20px;
     text-align: center;
-    background: radial-gradient(circle at top, #1a1a1a, #0f0f10);
+
+    background:
+        radial-gradient(circle at top,
+        #1a1a1a,
+        #0f0f10);
+
     border-bottom: 1px solid #2a2a2a;
+
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-content {
     max-width: 900px;
     margin: auto;
+    position: relative;
+    z-index: 2;
 }
 
-/* MAIN TITLE */
 .hero h1 {
     font-size: 52px;
-    color: #ffffff;
-    margin-bottom: 20px;
     line-height: 1.2;
+    margin-bottom: 20px;
+    color: #ffffff;
 }
 
-/* SUBTEXT */
 .hero p {
     font-size: 18px;
     color: #b5b5b5;
@@ -81,35 +186,60 @@ nav {
     padding: 0 10px;
 }
 
-/* BUTTON AREA */
+
+/* =========================================================
+   6. HERO BUTTONS
+========================================================= */
+
 .hero-buttons {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 15px;
+
     flex-wrap: wrap;
+
     margin-bottom: 50px;
 }
 
-/* PRIMARY BUTTON (already exists but reinforced) */
 .btn {
     display: inline-block;
+
     padding: 12px 25px;
+
     background-color: #4da6ff;
+
     color: #000;
     text-decoration: none;
     font-weight: bold;
-    border-radius: 6px;
-    transition: 0.3s;
+
+    border-radius: 8px;
+
+    border: none;
+    cursor: pointer;
+
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        background-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    will-change: transform;
 }
 
 .btn:hover {
     background-color: #2f8cff;
-    transform: scale(1.05);
+
+    transform: translateY(-2px) scale(1.05);
+
+    box-shadow:
+        0 10px 20px rgba(77, 166, 255, 0.25);
 }
 
-/* SECONDARY BUTTON */
 .btn.secondary {
-    background-color: transparent;
+    background: transparent;
     border: 2px solid #4da6ff;
     color: #4da6ff;
 }
@@ -119,30 +249,44 @@ nav {
     color: #000;
 }
 
-/* HERO STATS SECTION */
+
+/* =========================================================
+   7. HERO STATS
+========================================================= */
+
 .hero-stats {
     display: flex;
     justify-content: center;
     gap: 20px;
+
     flex-wrap: wrap;
 }
 
-/* INDIVIDUAL STAT BOX */
 .stat-box {
     background-color: #1a1a1a;
+
     padding: 15px 25px;
-    border-radius: 10px;
+
+    border-radius: 12px;
+
     border-left: 3px solid #4da6ff;
+
     min-width: 160px;
-    transition: 0.3s;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    will-change: transform;
 }
 
 .stat-box:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(77, 166, 255, 0.2);
+
+    box-shadow:
+        0 10px 20px rgba(77, 166, 255, 0.2);
 }
 
-/* STAT TEXT */
 .stat-box h3 {
     color: #4da6ff;
     margin-bottom: 5px;
@@ -153,11 +297,346 @@ nav {
     font-size: 14px;
 }
 
-/* =========================
-   MOBILE RESPONSIVE HERO
-========================= */
+
+/* =========================================================
+   8. GLOBAL SECTIONS
+========================================================= */
+
+.section,
+.about-preview,
+.what-we-do,
+.who-we-are,
+.why-different,
+.service-block,
+.contact-section {
+    padding: 80px 20px;
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.section h2,
+.about-header h2,
+.section-header h2,
+.who-header h2,
+.why-header h2,
+.services-intro h2,
+.contact-header h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.section p,
+.about-header p,
+.section-header p,
+.who-header p,
+.why-header p,
+.services-intro p,
+.contact-header p {
+    color: #b5b5b5;
+    line-height: 1.7;
+}
+
+.section.dark,
+.service-block.dark {
+    background-color: #151515;
+}
+
+
+/* =========================================================
+   9. GRID SYSTEMS
+========================================================= */
+
+.about-grid,
+.services-grid,
+.why-grid,
+.contact-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.about-grid,
+.services-grid,
+.why-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+/* =========================================================
+   10. PREMIUM CARD SYSTEM
+========================================================= */
+
+.card,
+.about-card,
+.service-box,
+.service-card,
+.why-card,
+.contact-card,
+.who-card,
+.stat-box {
+    background-color: #1a1a1a;
+
+    border-radius: 12px;
+
+    border-left: 4px solid #4da6ff;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+
+    will-change: transform;
+
+    transform-style: preserve-3d;
+}
+
+.card,
+.about-card,
+.service-box,
+.service-card,
+.why-card,
+.contact-card {
+    padding: 25px;
+}
+
+.who-card {
+    padding: 35px;
+}
+
+.card:hover,
+.about-card:hover,
+.service-box:hover,
+.service-card:hover,
+.why-card:hover,
+.contact-card:hover,
+.who-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 10px 25px rgba(77, 166, 255, 0.2);
+}
+
+
+/* =========================================================
+   11. CARD TYPOGRAPHY
+========================================================= */
+
+.about-card h3,
+.service-box h3,
+.why-card h3,
+.contact-card h3 {
+    color: #4da6ff;
+    margin-bottom: 10px;
+}
+
+.about-card p,
+.service-box p,
+.why-card p,
+.contact-card p,
+.who-card p {
+    color: #b5b5b5;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   12. CONTACT SECTION
+========================================================= */
+
+.contact-card.highlight {
+    border-left: 4px solid #25D366;
+
+    background:
+        linear-gradient(145deg,
+        #1a1a1a,
+        #141414);
+}
+
+.contact-card.highlight h3 {
+    color: #25D366;
+}
+
+.contact-card a {
+    display: inline-block;
+
+    padding: 12px 18px;
+
+    background-color: #4da6ff;
+
+    color: #000;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    border-radius: 6px;
+
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease;
+}
+
+.contact-card a:hover {
+    background-color: #2f8cff;
+    transform: scale(1.05);
+}
+
+.contact-card.highlight a {
+    background-color: #25D366;
+}
+
+.contact-card.highlight a:hover {
+    background-color: #1ebe5d;
+}
+
+
+/* =========================================================
+   13. SERVICES PAGE
+========================================================= */
+
+.services-intro {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.service-block h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.goal {
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.result {
+    margin-top: 15px;
+    color: #4da6ff;
+    font-weight: bold;
+}
+
+.service-card ul {
+    margin-left: 20px;
+    color: #b5b5b5;
+}
+
+.service-card ul li {
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   14. FOOTER
+========================================================= */
+
+footer {
+    text-align: center;
+
+    padding: 20px;
+
+    background-color: #1a1a1a;
+
+    color: #aaa;
+
+    margin-top: 40px;
+
+    border-top: 1px solid #2a2a2a;
+}
+
+
+/* =========================================================
+   15. WHATSAPP FLOAT BUTTON
+========================================================= */
+
+.whatsapp {
+    position: fixed;
+
+    bottom: 20px;
+    right: 20px;
+
+    background-color: #25D366;
+
+    color: white;
+
+    padding: 15px 18px;
+
+    border-radius: 50px;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    box-shadow:
+        0 0 15px rgba(0, 0, 0, 0.4);
+
+    z-index: 999;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.whatsapp:hover {
+    transform: scale(1.1);
+
+    box-shadow:
+        0 0 25px rgba(37, 211, 102, 0.4);
+}
+
+
+/* =========================================================
+   16. RIPPLE ANIMATION
+========================================================= */
+
+@keyframes ripple {
+
+    to {
+        transform: scale(6);
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   17. MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .about-grid,
+    .services-grid,
+    .why-grid,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
 
 @media (max-width: 768px) {
+
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links {
+        margin-top: 10px;
+    }
+
+    .hero {
+        padding: 100px 20px;
+    }
 
     .hero h1 {
         font-size: 32px;
@@ -172,689 +651,27 @@ nav {
         align-items: center;
     }
 
+    .section h2,
+    .about-header h2,
+    .section-header h2,
+    .who-header h2,
+    .why-header h2,
+    .services-intro h2,
+    .contact-header h2 {
+        font-size: 28px;
+    }
+
     .stat-box {
         width: 100%;
         text-align: center;
-    }
-}
-/* =========================
-   BUTTONS
-========================= */
-
-.btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 25px;
-    background-color: #4da6ff;
-    color: #000;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 6px;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background-color: #2f8cff;
-    transform: scale(1.05);
-}
-
-/* =========================
-   SECTIONS
-========================= */
-
-.section {
-    padding: 70px 20px;
-    max-width: 1000px;
-    margin: auto;
-}
-
-.section h2 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 32px;
-    color: #ffffff;
-}
-
-.section.dark {
-    background-color: #151515;
-}
-
-/* =========================
-   CARDS
-========================= */
-
-.card {
-    background-color: #1a1a1a;
-    padding: 20px;
-    margin: 15px 0;
-    border-left: 4px solid #4da6ff;
-    border-radius: 6px;
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #1a1a1a;
-    color: #aaa;
-    margin-top: 40px;
-}
-
-/* =========================
-   WHATSAPP BUTTON
-========================= */
-
-.whatsapp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25D366;
-    color: white;
-    padding: 15px 18px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 0 15px rgba(0,0,0,0.4);
-    transition: 0.3s;
-}
-
-.whatsapp:hover {
-    transform: scale(1.1);
-}
-
-/* =========================
-   MOBILE RESPONSIVE
-========================= */
-
-@media (max-width: 768px) {
-
-    nav {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .nav-links {
-        margin-top: 10px;
-    }
-
-    .hero h1 {
-        font-size: 28px;
-    }
-
-    .section h2 {
-        font-size: 24px;
-    }
-}/* =========================
-   ABOUT PREVIEW SECTION
-========================= */
-
-.about-preview {
-    padding: 80px 20px;
-    max-width: 1100px;
-    margin: auto;
-    text-align: center;
-}
-
-/* HEADER */
-.about-header h2 {
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.about-header p {
-    color: #b5b5b5;
-    margin-bottom: 50px;
-    font-size: 16px;
-}
-
-/* GRID LAYOUT */
-.about-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-/* CARD DESIGN */
-.about-card {
-    background-color: #1a1a1a;
-    padding: 25px;
-    border-radius: 10px;
-    border-left: 4px solid #4da6ff;
-    text-align: left;
-    transition: 0.3s ease;
-}
-
-/* HOVER EFFECT */
-.about-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(77, 166, 255, 0.2);
-}
-
-/* TITLE */
-.about-card h3 {
-    color: #4da6ff;
-    margin-bottom: 10px;
-}
-
-/* TEXT */
-.about-card p {
-    color: #b5b5b5;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-/* =========================
-   MOBILE RESPONSIVE
-========================= */
-
-@media (max-width: 900px) {
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .about-header h2 {
-        font-size: 28px;
-    }
-}/* =========================
-   WHAT WE DO SECTION (HOME)
-========================= */
-
-.what-we-do {
-    padding: 80px 20px;
-    max-width: 1100px;
-    margin: auto;
-    text-align: center;
-}
-
-/* HEADER */
-.section-header h2 {
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.section-header p {
-    color: #b5b5b5;
-    margin-bottom: 50px;
-    font-size: 16px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* GRID */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-/* SERVICE BOX */
-.service-box {
-    background-color: #1a1a1a;
-    padding: 25px;
-    border-radius: 10px;
-    border-left: 4px solid #4da6ff;
-    text-align: left;
-    transition: 0.3s ease;
-}
-
-/* HOVER EFFECT */
-.service-box:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(77, 166, 255, 0.2);
-}
-
-/* TITLE */
-.service-box h3 {
-    color: #4da6ff;
-    margin-bottom: 10px;
-}
-
-/* TEXT */
-.service-box p {
-    color: #b5b5b5;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-/* =========================
-   MOBILE RESPONSIVE
-========================= */
-
-@media (max-width: 900px) {
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .section-header h2 {
-        font-size: 28px;
-    }
-}
-/* =========================
-   ABOUT PAGE HERO
-========================= */
-
-.hero {
-    padding: 110px 20px;
-    text-align: center;
-    background: radial-gradient(circle at top, #1a1a1a, #0f0f10);
-    border-bottom: 1px solid #2a2a2a;
-}
-
-/* CONTENT WRAPPER */
-.hero-content {
-    max-width: 850px;
-    margin: auto;
-}
-
-/* MAIN TITLE */
-.hero h1 {
-    font-size: 46px;
-    color: #ffffff;
-    margin-bottom: 20px;
-    line-height: 1.2;
-}
-
-/* MAIN PARAGRAPH */
-.hero p {
-    font-size: 18px;
-    color: #b5b5b5;
-    margin-bottom: 15px;
-    line-height: 1.6;
-}
-
-/* SECOND PARAGRAPH (if used) */
-.hero p + p {
-    color: #9aa0a6;
-    font-size: 16px;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-/* =========================
-   MOBILE RESPONSIVE
-========================= */
-
-@media (max-width: 768px) {
-
-    .hero h1 {
-        font-size: 30px;
-    }
-
-    .hero p {
-        font-size: 16px;
-    }
-}/* =========================
-   WHO WE ARE SECTION
-========================= */
-
-.who-we-are {
-    padding: 80px 20px;
-    max-width: 1000px;
-    margin: auto;
-    text-align: center;
-}
-
-/* HEADER */
-.who-header h2 {
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.who-header p {
-    color: #b5b5b5;
-    margin-bottom: 40px;
-    font-size: 16px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* MAIN CARD */
-.who-card {
-    background-color: #1a1a1a;
-    padding: 35px;
-    border-radius: 12px;
-    border-left: 4px solid #4da6ff;
-    text-align: left;
-    transition: 0.3s ease;
-}
-
-/* HOVER EFFECT */
-.who-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(77, 166, 255, 0.2);
-}
-
-/* PARAGRAPHS */
-.who-card p {
-    color: #b5b5b5;
-    font-size: 15px;
-    line-height: 1.8;
-    margin-bottom: 15px;
-}
-
-/* LAST PARAGRAPH CLEANUP */
-.who-card p:last-child {
-    margin-bottom: 0;
-}
-
-/* =========================
-   MOBILE RESPONSIVE
-========================= */
-
-@media (max-width: 768px) {
-
-    .who-header h2 {
-        font-size: 28px;
-    }
-
-    .who-card {
-        padding: 25px;
-    }
-}/* =========================
-   WHAT MAKES US DIFFERENT
-========================= */
-
-.why-different {
-    padding: 80px 20px;
-    max-width: 1100px;
-    margin: auto;
-    text-align: center;
-}
-
-/* HEADER */
-.why-header h2 {
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.why-header p {
-    color: #b5b5b5;
-    font-size: 16px;
-    margin-bottom: 50px;
-    max-width: 750px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-}
-
-/* GRID */
-.why-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-/* CARD */
-.why-card {
-    background-color: #1a1a1a;
-    padding: 25px;
-    border-radius: 12px;
-    border-left: 4px solid #4da6ff;
-    text-align: left;
-    transition: 0.3s ease;
-}
-
-/* HOVER EFFECT */
-.why-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(77, 166, 255, 0.2);
-}
-
-/* TITLE */
-.why-card h3 {
-    color: #4da6ff;
-    margin-bottom: 10px;
-}
-
-/* TEXT */
-.why-card p {
-    color: #b5b5b5;
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-/* =========================
-   MOBILE RESPONSIVE
-========================= */
-
-@media (max-width: 900px) {
-    .why-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .why-header h2 {
-        font-size: 28px;
-    }
-}
-/* =========================
-   SERVICES PAGE SYSTEM STYLE
-========================= */
-
-/* INTRO */
-.services-intro {
-    text-align: center;
-    padding: 60px 20px;
-    max-width: 900px;
-    margin: auto;
-}
-
-.services-intro h2 {
-    font-size: 38px;
-    margin-bottom: 10px;
-}
-
-.services-intro p {
-    color: #b5b5b5;
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-/* SERVICE SECTIONS */
-.service-block {
-    padding: 70px 20px;
-    max-width: 1000px;
-    margin: auto;
-}
-
-.service-block.dark {
-    background-color: #151515;
-}
-
-/* SECTION TITLE */
-.service-block h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 30px;
-}
-
-/* CARD */
-.service-card {
-    background-color: #1a1a1a;
-    padding: 30px;
-    border-radius: 12px;
-    border-left: 4px solid #4da6ff;
-    transition: 0.3s ease;
-}
-
-/* HOVER */
-.service-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(77, 166, 255, 0.2);
-}
-
-/* GOAL TEXT */
-.goal {
-    color: #ffffff;
-    margin-bottom: 15px;
-}
-
-/* LIST */
-.service-card ul {
-    margin-left: 20px;
-    color: #b5b5b5;
-}
-
-.service-card ul li {
-    margin-bottom: 8px;
-}
-
-/* RESULT LINE */
-.result {
-    margin-top: 15px;
-    color: #4da6ff;
-    font-weight: bold;
-}
-
-/* =========================
-   MOBILE RESPONSIVE
-========================= */
-
-@media (max-width: 768px) {
-
-    .services-intro h2 {
-        font-size: 28px;
-    }
-
-    .service-block h2 {
-        font-size: 24px;
-    }
-
-    .service-card {
-        padding: 20px;
-    }
-}
-/* =========================
-   FLOW DIGITAL CONTACT SECTION (SPECIFIC)
-========================= */
-
-.contact-section {
-    padding: 80px 20px;
-    max-width: 1100px;
-    margin: auto;
-    background-color: #0f0f10;
-    color: #ffffff;
-}
-
-/* HEADER */
-.contact-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.contact-header h2 {
-    font-size: 42px;
-    margin-bottom: 10px;
-    color: #ffffff;
-}
-
-.contact-header p {
-    color: #b5b5b5;
-    font-size: 16px;
-    max-width: 750px;
-    margin: auto;
-    line-height: 1.6;
-}
-
-/* GRID */
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-/* CARD BASE STYLE */
-.contact-card {
-    background-color: #1a1a1a;
-    padding: 25px;
-    border-radius: 12px;
-    border-left: 4px solid #4da6ff;
-    transition: 0.3s ease;
-    text-align: left;
-}
-
-/* HOVER EFFECT */
-.contact-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(77, 166, 255, 0.2);
-}
-
-/* HEADINGS */
-.contact-card h3 {
-    color: #4da6ff;
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-/* TEXT */
-.contact-card p {
-    color: #b5b5b5;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 12px;
-}
-
-/* LINKS (EMAIL + WHATSAPP BUTTONS) */
-.contact-card a {
-    display: inline-block;
-    padding: 12px 18px;
-    background-color: #4da6ff;
-    color: #000;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 6px;
-    transition: 0.3s ease;
-}
-
-/* LINK HOVER */
-.contact-card a:hover {
-    background-color: #2f8cff;
-    transform: scale(1.05);
-}
-
-/* WHATSAPP CARD (MAKE IT STAND OUT) */
-.contact-card.highlight {
-    border-left: 4px solid #25D366;
-    background: linear-gradient(145deg, #1a1a1a, #141414);
-}
-
-.contact-card.highlight h3 {
-    color: #25D366;
-}
-
-/* WHATSAPP BUTTON SPECIAL */
-.contact-card.highlight a {
-    background-color: #25D366;
-    color: #000;
-}
-
-.contact-card.highlight a:hover {
-    background-color: #1ebe5d;
-}
-
-/* =========================
-   MOBILE RESPONSIVE
-========================= */
-
-@media (max-width: 768px) {
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-header h2 {
-        font-size: 30px;
     }
 
     .contact-card {
         text-align: center;
     }
+
+    .who-card {
+        padding: 25px;
+    }
+
 }
