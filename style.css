@@ -670,10 +670,10 @@ footer {
     }
 }
 /* =========================================================
-   NAV ACTIVE PAGE SYSTEM (FLOW DIGITAL)
-   - Fixed underline indicator
-   - Glow projection upward
-   - Text pulse on active click
+   NAV ACTIVE PAGE SYSTEM (FIXED BEHAVIOR)
+   - Active underline ALWAYS visible
+   - Hover is separate
+   - Glow only on active page
 ========================================================= */
 
 .nav-links a {
@@ -682,7 +682,10 @@ footer {
     transition: color 0.3s ease;
 }
 
-/* DEFAULT HOVER UNDERLINE (subtle) */
+/* =========================
+   BASE UNDERLINE (OFF STATE)
+   ========================= */
+
 .nav-links a::after {
     content: "";
     position: absolute;
@@ -692,32 +695,35 @@ footer {
     height: 2px;
     background-color: #4da6ff;
     transition: width 0.3s ease;
+    opacity: 0.6;
 }
 
-/* HOVER EXPANDS LINE */
+/* Hover effect ONLY */
 .nav-links a:hover::after {
     width: 100%;
 }
 
-/* =========================================================
-   ACTIVE PAGE LINE (PERMANENT)
-========================================================= */
+/* =========================
+   ACTIVE PAGE (ALWAYS ON)
+   ========================= */
 
+.nav-links a.active {
+    color: #4da6ff;
+    text-shadow: 0 0 10px rgba(77, 166, 255, 0.35);
+}
+
+/* Permanent underline for active page */
 .nav-links a.active::after {
     width: 100%;
-    height: 2px;
-    background-color: #4da6ff;
 
-    /* glow line */
+    opacity: 1;
+
     box-shadow:
         0 0 8px rgba(77, 166, 255, 0.6),
         0 0 18px rgba(77, 166, 255, 0.35);
 }
 
-/* =========================================================
-   GLOW SHINES UPWARD ON TEXT
-========================================================= */
-
+/* Glow projection above line */
 .nav-links a.active::before {
     content: "";
     position: absolute;
@@ -741,32 +747,5 @@ footer {
     opacity: 0.9;
 
     z-index: -1;
-
-    /* makes glow feel like it's coming from the line upward */
     pointer-events: none;
-}
-
-/* =========================================================
-   ACTIVE TEXT “PULSE ON LOAD”
-========================================================= */
-
-.nav-links a.active {
-    color: #4da6ff;
-    text-shadow: 0 0 10px rgba(77, 166, 255, 0.35);
-    animation: navPulse 1.8s ease-in-out 1;
-}
-
-@keyframes navPulse {
-    0% {
-        transform: scale(1);
-        text-shadow: 0 0 0 rgba(77, 166, 255, 0);
-    }
-    50% {
-        transform: scale(1.06);
-        text-shadow: 0 0 18px rgba(77, 166, 255, 0.55);
-    }
-    100% {
-        transform: scale(1);
-        text-shadow: 0 0 10px rgba(77, 166, 255, 0.35);
-    }
 }
