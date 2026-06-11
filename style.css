@@ -1,4 +1,4 @@
-/* =========================================================
+ /* =========================================================
    FLOW DIGITAL - OPTIMIZED PREMIUM THEME SYSTEM
    Grey / Black / White / Light Blue
    Optimized For:
@@ -31,10 +31,8 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
 
-    /* Snap scrolling */
     scroll-snap-type: y mandatory;
 
-    /* Better rendering */
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 }
@@ -599,12 +597,10 @@ footer {
 ========================================================= */
 
 @keyframes ripple {
-
     to {
         transform: scale(6);
         opacity: 0;
     }
-
 }
 
 
@@ -620,7 +616,6 @@ footer {
     .contact-grid {
         grid-template-columns: 1fr;
     }
-
 }
 
 @media (max-width: 768px) {
@@ -673,5 +668,4 @@ footer {
     .who-card {
         padding: 25px;
     }
-
 }
