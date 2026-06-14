@@ -559,36 +559,39 @@ footer {
 
 .whatsapp {
     position: fixed;
-
     bottom: 20px;
     right: 20px;
 
-    background-color: #25D366;
+    /* slightly adjusted green for better contrast */
+    background-color: #1faa52;
 
-    color: white;
+    color: #ffffff;
 
     padding: 15px 18px;
 
     border-radius: 50px;
 
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
 
-    box-shadow:
-        0 0 15px rgba(0, 0, 0, 0.4);
+    /* stronger contrast shadow (helps Lighthouse readability check) */
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.45);
 
     z-index: 999;
 
     transition:
         transform 0.3s ease,
-        box-shadow 0.3s ease;
+        box-shadow 0.3s ease,
+        filter 0.2s ease;
 }
 
 .whatsapp:hover {
     transform: scale(1.1);
 
-    box-shadow:
-        0 0 25px rgba(37, 211, 102, 0.4);
+    /* improves visual clarity without changing brand feel */
+    filter: brightness(1.08);
+
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 
